@@ -1,6 +1,6 @@
 #include "metawriter.h"
 
-namespace thisptr::Meta::Json {
+namespace thisptr::meta::json {
 
   std::string JsonWriter::write(std::any &obj) {
     if (_s.GetLength() > 0)

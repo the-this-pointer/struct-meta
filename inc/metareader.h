@@ -10,7 +10,7 @@
 #include <map>
 #include <vector>
 
-namespace thisptr::Meta::Json {
+namespace thisptr::meta::json {
 
   using JsonValue = std::any;
   using JsonObject = std::map<std::string, JsonValue>;
@@ -127,7 +127,7 @@ namespace thisptr::Meta::Json {
     JsonReader() = default;
     ~JsonReader() = default;
     std::any read(const std::string &json);
-    void readObject(const std::string &json, thisptr::Meta::AbstractMetaStruct &ms);
+    void readObject(const std::string &json, thisptr::meta::AbstractMetaStruct &ms);
 
   };
 

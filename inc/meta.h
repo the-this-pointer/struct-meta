@@ -15,14 +15,14 @@
 #include <iomanip>
 #include <functional>
 
-namespace thisptr::Meta {
+namespace thisptr::meta {
         template <char... chars>
         using meta_string = std::integer_sequence<char, chars...>;
 
         template <typename T, T... chars>
         constexpr meta_string<chars...> operator""_meta() { return { }; }
 
-        namespace Any {
+        namespace any {
                 template<class T, class F>
                 inline std::pair<const std::type_index, std::function<void(void* ptr, std::any const&)>>
                     AnyTypeDeSerializer(F const &f)
@@ -125,8 +125,8 @@ namespace thisptr::Meta {
                     return;
                 }
                 // find deserializer by class value type
-                if (const auto it = Any::g_anyTypeSerializers.find(std::type_index(std::make_any<T>(_value).type()));
-                    it != Any::g_anyTypeSerializers.cend()) {
+                if (const auto it = any::g_anyTypeSerializers.find(std::type_index(std::make_any<T>(_value).type()));
+                    it != any::g_anyTypeSerializers.cend()) {
                     it->second(&_value, value);
                 } else {
                     try {

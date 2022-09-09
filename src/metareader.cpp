@@ -1,6 +1,6 @@
 #include "metareader.h"
 
-namespace thisptr::Meta::Json {
+namespace thisptr::meta::json {
 
   bool JsonHandler<JsonValue>::StartObject() {
     

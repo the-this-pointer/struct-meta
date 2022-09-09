@@ -9,7 +9,7 @@
 #include <vector>
 
 using namespace std;
-using namespace thisptr::Meta;
+using namespace thisptr::meta;
 
 class MetaStruct1: public MetaStruct {
 public:
@@ -41,7 +41,7 @@ int main()
   ms2._dbl.val() = 2.4;
   ms2._vstr.val() = {"1", "22", "333",};
 
-  auto* writer2 = new Json::JsonWriter;
+  auto* writer2 = new json::JsonWriter;
   // Meta Writer Custom Type Registration
   writer2->registerTypeSerializer<MetaStruct1>([writer2](auto x) {
     auto* ms = static_cast<AbstractMetaStruct*>(&x);
@@ -53,7 +53,7 @@ int main()
   std::string json = writer2->write(_b);
   cout << json << endl << endl;
 
-  auto* reader = new Json::JsonReader;
+  auto* reader = new json::JsonReader;
   std::any obj = reader->read(json);
 
   MetaStruct2 ms3;
@@ -61,7 +61,7 @@ int main()
   ms3.setValue("json", m);
 
   //get json again to test values!:
-  auto* writer = new Json::JsonWriter;
+  auto* writer = new json::JsonWriter;
   // Meta Writer Custom Type Registration
   writer->registerTypeSerializer<MetaStruct1>([writer](auto x) {
     auto* ms = static_cast<AbstractMetaStruct*>(&x);

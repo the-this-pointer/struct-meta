@@ -17,7 +17,7 @@
 #include "metautils.h"
 #include "meta.h"
 
-namespace thisptr::Meta::Json {
+namespace thisptr::meta::json {
 
   class JsonWriter {
   public:

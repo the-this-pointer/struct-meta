@@ -1,8 +1,8 @@
 #include "meta.h"
 
 namespace thisptr {
-    namespace Meta {
-        namespace Any {
+    namespace meta {
+        namespace any {
             std::unordered_map<
                 std::type_index, std::function<void(void* ptr, std::any const&)>>
                 g_anyTypeSerializers {
