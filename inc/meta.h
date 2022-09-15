@@ -72,14 +72,17 @@ namespace thisptr::meta {
         public:
             typedef T Type;
 
-            MetaField(): MetaField(nullptr) {}
+            MetaField(): MetaField(nullptr) {
+                DBG_FUNC
+            }
 
             MetaField(AbstractMetaStruct* ms) {
+                DBG_FUNC
                 _ms = ms;
                 if (_ms)
                     _ms->registerField(this);
                 else
-                    std::cout << "MetaStruct is not provided";
+                    DBG_E("MetaStruct is not provided");
 
                 std::string_view metaStr(getMetaString());
                 std::vector<std::string_view> metaFields = std::move(Utilities::split(metaStr));
@@ -89,18 +92,16 @@ namespace thisptr::meta {
                                     _meta[item.at(0)] = item.at(1);
                                 }
                               });
-
-                if (this->meta("verbose") == "true") {
-                    _verboseMode = true;
-                }
             }
 
             ~MetaField() {
+                DBG_FUNC
                 if (_ms)
                     _ms->unregisterField(this);
             }
 
             std::string_view meta(std::string_view key) override {
+                DBG_FUNC
                 auto it = _meta.find(key);
                 if (it == _meta.end())
                     return "";
@@ -108,43 +109,53 @@ namespace thisptr::meta {
             }
 
             T& val() {
+                DBG_FUNC
                 return _value;
             }
 
             void setVal(T& val) {
+                DBG_FUNC
                 _value = val;
             }
 
             std::any value() override {
+                DBG_FUNC
                 return std::make_any<T>(_value);
             }
 
             void setValue(const std::string& metaFieldName, std::any& value) override {
+                DBG_FUNC
                 if constexpr (std::is_base_of_v<AbstractMetaStruct, T>) {
-                    _value.setValue(metaFieldName, std::any_cast<std::map<std::string, std::any>>(value));
-                    return;
+                  DBG_T("Found nested struct, going to set it's value...");
+                  _value.setValue(metaFieldName, std::any_cast<std::map<std::string, std::any>>(value));
+                  return;
                 }
                 // find deserializer by class value type
                 if (const auto it = any::g_anyTypeSerializers.find(std::type_index(std::make_any<T>(_value).type()));
                     it != any::g_anyTypeSerializers.cend()) {
-                    it->second(&_value, value);
+                  it->second(&_value, value);
+                  std::stringstream ss;
+                  ss << "Registered type assigned successfully, type: " << std::quoted(value.type().name());
+                  DBG_I(ss.str());
                 } else {
                     try {
                         _value = std::any_cast<T>(value);
+                      std::stringstream ss;
+                      ss << "Type assigned successfully, type: " << std::quoted(value.type().name());
+                      DBG_I(ss.str());
                     }
                     catch(const std::bad_any_cast& e) {
-                        std::cout << "Unregistered vector type "<< std::quoted(value.type().name()) << std::endl;
+                      std::stringstream ss;
+                      ss << "Type should be registered first, type:  " << std::quoted(value.type().name());
+                      DBG_E(ss.str());
                     }
                 }
             }
 
             T operator= (T other) {
+                DBG_FUNC
                 _value = other;
                 return other;
-            }
-
-            bool verboseMode() {
-                return _verboseMode;
             }
 
         private:
@@ -152,9 +163,9 @@ namespace thisptr::meta {
             T _value;
             AbstractMetaStruct* _ms;
             std::map<std::string_view, std::string_view> _meta{};
-            bool _verboseMode {false};
 
             const char* getMetaString() const {
+                DBG_FUNC
                 static constexpr char str[sizeof...(elements) + 1] = { elements..., '\0' };
                 return str;
             }

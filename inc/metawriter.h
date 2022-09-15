@@ -40,6 +40,7 @@ namespace thisptr::meta::json {
     template<class T, class F>
     inline std::pair<const std::type_index, std::function<void(std::any const &)>>
     TypeSerializerV(F const &f) {
+      DBG_FUNC
       return {
           std::type_index(typeid(T)),
           [this, g = f](std::any const &a) {
@@ -57,6 +58,7 @@ namespace thisptr::meta::json {
     template<class T, class F>
     inline std::pair<const std::type_index, std::function<void(std::any const &)>>
     TypeSerializerMS(F const &f) {
+      DBG_FUNC
       return {
           std::type_index(typeid(T)),
           [this, g = f](std::any const &a) {
@@ -123,12 +125,16 @@ namespace thisptr::meta::json {
 
   template<class T, class F>
   void JsonWriter::registerTypeSerializer(const F &f) {
-    std::cout << "Register type " << std::quoted(typeid(T).name()) << std::endl;
+    DBG_FUNC
+    std::stringstream ss;
+    ss << "Register type " << std::quoted(typeid(T).name()) << std::endl;
+    DBG_I(ss.str());
     _typeSerializers.insert(TypeSerializer<T>(f));
   }
 
   template<class T, class F>
   std::pair<const std::type_index, std::function<void(std::any const &)>> JsonWriter::TypeSerializer(const F &f) {
+    DBG_FUNC
     return {
         std::type_index(typeid(T)),
         [g = f](std::any const &a)

@@ -10,6 +10,28 @@
 #include <any>
 #include <string_view>
 
+#ifdef META_DEBUG
+#include <logger.h>
+
+#define DBG_INIT thisptr::Logger::getInstance("main", std::cout);
+#define DBG_C(x) (*thisptr::Logger::getInstance())(thisptr::Logger::CRIT) << (x) << std::endl;
+#define DBG_E(x) (*thisptr::Logger::getInstance())(thisptr::Logger::ERR) << (x) << std::endl;
+#define DBG_W(x) (*thisptr::Logger::getInstance())(thisptr::Logger::WARN) << (x) << std::endl;
+#define DBG_I(x) (*thisptr::Logger::getInstance())(thisptr::Logger::INFO) << (x) << std::endl;
+#define DBG_D(x) (*thisptr::Logger::getInstance())(thisptr::Logger::DEBUG) << (x) << std::endl;
+#define DBG_T(x) (*thisptr::Logger::getInstance())(thisptr::Logger::CRIT) << (x) << std::endl;
+#define DBG_FUNC DBG_D(__PRETTY_FUNCTION__);
+#else
+#define DBG_INIT
+#define DBG_C(x)
+#define DBG_E(x)
+#define DBG_W(x)
+#define DBG_I(x)
+#define DBG_D(x)
+#define DBG_T(x)
+#define DBG_FUNC
+#endif
+
 namespace thisptr {
     namespace Utilities {
         template<typename T>

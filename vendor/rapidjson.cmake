@@ -3,6 +3,7 @@ include(ExternalProject)
 ExternalProject_Add(
         rapidjson
         PREFIX "vendor/rapidjson"
+        SOURCE_DIR "${CMAKE_SOURCE_DIR}/vendor/rapidjson"
         GIT_REPOSITORY "https://github.com/Tencent/rapidjson.git"
         GIT_TAG 06d58b9e848c650114556a23294d0b6440078c61
         TIMEOUT 10

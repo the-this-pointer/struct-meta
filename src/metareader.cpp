@@ -3,7 +3,7 @@
 namespace thisptr::meta::json {
 
   bool JsonHandler<JsonValue>::StartObject() {
-    
+    DBG_FUNC
     if (_counter > 0 && _innerHandler) {
       _innerHandler->StartObject();
     } else if (!_innerHandler) {
@@ -14,7 +14,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::StartArray() {
-    
+    DBG_FUNC
     if (_counter > 0 && _innerHandler) {
       _innerHandler->StartArray();
     } else if (!_innerHandler) {
@@ -25,7 +25,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::Bool(bool b) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Bool(b);
       return true;
@@ -35,7 +35,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::Null() {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Null();
       return true;
@@ -45,7 +45,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::Int(int32_t i) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Int(i);
       return true;
@@ -55,7 +55,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::Double(double d) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Double(d);
       return true;
@@ -65,7 +65,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::String(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->String(str, length, copy);
       return true;
@@ -75,9 +75,8 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::EndObject(rapidjson::SizeType memberCount) {
-
+    DBG_FUNC
     if (_counter == 1 && _innerHandler) {
-
       _value = std::move(_innerHandler->value());
       delete _innerHandler;
       _innerHandler = nullptr;
@@ -89,9 +88,8 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::EndArray(rapidjson::SizeType elementCount) {
-
+    DBG_FUNC
     if (_counter == 1 && _innerHandler) {
-
       _value = std::move(_innerHandler->value());
       delete _innerHandler;
       _innerHandler = nullptr;
@@ -103,12 +101,12 @@ namespace thisptr::meta::json {
   }
 
   std::any JsonHandler<JsonValue>::value() {
-
+    DBG_FUNC
     return _value;
   }
 
   bool JsonHandler<JsonValue>::Key(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Key(str, length, copy);
       return true;
@@ -118,7 +116,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::RawNumber(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->RawNumber(str, length, copy);
       return true;
@@ -127,7 +125,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::Uint64(uint64_t u) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Uint64(u);
       return true;
@@ -137,7 +135,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::Int64(int64_t i) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Int64(i);
       return true;
@@ -147,7 +145,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonValue>::Uint(uint32_t u) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Uint(u);
       return true;
@@ -157,7 +155,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::StartObject() {
-
+    DBG_FUNC
     if (_counter > 0 && _innerHandler) {
       _innerHandler->StartObject();
     } else if (!_innerHandler) {
@@ -168,7 +166,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::StartArray() {
-
+    DBG_FUNC
     if (_counter > 0 && _innerHandler) {
       _innerHandler->StartArray();
     } else if (!_innerHandler) {
@@ -179,7 +177,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::StartObject() {
-
+    DBG_FUNC
     if (_counter > 0 && _innerHandler) {
       _innerHandler->StartObject();
     } else if (!_innerHandler) {
@@ -190,7 +188,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::StartArray() {
-
+    DBG_FUNC
     if (_counter > 0 && _innerHandler) {
       _innerHandler->StartArray();
     } else if (!_innerHandler) {
@@ -201,7 +199,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::Null() {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Null();
       return true;
@@ -211,7 +209,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::Bool(bool b) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Bool(b);
       return true;
@@ -221,7 +219,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::Null() {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Null();
       return true;
@@ -231,7 +229,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::Int(int32_t i) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Int(i);
       return true;
@@ -241,7 +239,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::Bool(bool b) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Bool(b);
       return true;
@@ -251,7 +249,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::Int(int32_t i) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Int(i);
       return true;
@@ -261,7 +259,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::Uint(uint32_t u) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Uint(u);
       return true;
@@ -271,7 +269,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::Double(double d) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Double(d);
       return true;
@@ -281,7 +279,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::String(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->String(str, length, copy);
       return true;
@@ -291,9 +289,8 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::EndObject(rapidjson::SizeType memberCount) {
-
+    DBG_FUNC
     if (_counter == 1 && _innerHandler) {
-
       _value.insert({_currentKey, std::move(_innerHandler->value())});
       delete _innerHandler;
       _innerHandler = nullptr;
@@ -305,9 +302,8 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::EndArray(rapidjson::SizeType elementCount) {
-
+    DBG_FUNC
     if (_counter == 1 && _innerHandler) {
-
       _value.insert({_currentKey, std::move(_innerHandler->value())});
       delete _innerHandler;
       _innerHandler = nullptr;
@@ -319,12 +315,12 @@ namespace thisptr::meta::json {
   }
 
   std::any JsonHandler<JsonObject>::value() {
-
+    DBG_FUNC
     return _value;
   }
 
   bool JsonHandler<JsonObject>::Key(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Key(str, length, copy);
       return true;
@@ -334,7 +330,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::RawNumber(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->RawNumber(str, length, copy);
       return true;
@@ -343,7 +339,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::Uint64(uint64_t u) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Uint64(u);
       return true;
@@ -353,7 +349,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::Int64(int64_t i) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Int64(i);
       return true;
@@ -363,7 +359,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonObject>::Uint(uint32_t u) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Uint(u);
       return true;
@@ -373,7 +369,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::Int64(int64_t i) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Int64(i);
       return true;
@@ -383,7 +379,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::Uint64(uint64_t u) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Uint64(u);
       return true;
@@ -393,7 +389,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::Double(double d) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Double(d);
       return true;
@@ -403,7 +399,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::RawNumber(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->RawNumber(str, length, copy);
       return true;
@@ -412,7 +408,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::String(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->String(str, length, copy);
       return true;
@@ -422,7 +418,7 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::Key(const char *str, rapidjson::SizeType length, bool copy) {
-
+    DBG_FUNC
     if (_innerHandler) {
       _innerHandler->Key(str, length, copy);
       return true;
@@ -431,9 +427,8 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::EndObject(rapidjson::SizeType memberCount) {
-
+    DBG_FUNC
     if (_counter == 1 && _innerHandler) {
-
       _value.push_back(std::move(_innerHandler->value()));
       delete _innerHandler;
       _innerHandler = nullptr;
@@ -445,9 +440,8 @@ namespace thisptr::meta::json {
   }
 
   bool JsonHandler<JsonArray>::EndArray(rapidjson::SizeType elementCount) {
-
+    DBG_FUNC
     if (_counter == 1 && _innerHandler) {
-
       _value.push_back(std::move(_innerHandler->value()));
       delete _innerHandler;
       _innerHandler = nullptr;
@@ -459,11 +453,12 @@ namespace thisptr::meta::json {
   }
 
   std::any JsonHandler<JsonArray>::value() {
-
+    DBG_FUNC
     return _value;
   }
 
   std::any JsonReader::read(const std::string &json) {
+    DBG_FUNC
     JsonHandler<JsonValue> handler;
     rapidjson::Reader reader;
     rapidjson::StringStream ss(json.c_str());
@@ -473,6 +468,7 @@ namespace thisptr::meta::json {
   }
 
   void JsonReader::readObject(const std::string &json, AbstractMetaStruct &ms) {
+    DBG_FUNC
     std::any obj = read(json);
     JsonObject m = std::any_cast<JsonObject const &>(obj);
     ms.setValue("json", m);

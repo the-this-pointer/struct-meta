@@ -30,6 +30,7 @@ public:
 
 int main()
 {
+  DBG_INIT;
   MetaStruct2 ms2;
 
   ms2._ms3.val()._bol3 = true;
